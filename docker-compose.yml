@@ -5,10 +5,10 @@ services:
     environment:
       POSTGRES_USER: username
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: hausmeister_fix
       PGDATA: /var/lib/postgresql/data
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
     ports:
       - "5433:5432"
     networks:
@@ -26,6 +26,11 @@ services:
      KC_HOSTNAME_STRICT: "false"
      KC_BOOTSTRAP_ADMIN_USERNAME: admin
      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+     KC_DB: postgres
+     KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+     KC_DB_USERNAME: ${POSTGRES_USER:-username}
+     KC_DB_PASSWORD: ${POSTGRES_PASSWORD:-password}
+     KC_DB_SCHEMA: keycloak
     ports:
       - "9090:8080"
     depends_on:
@@ -38,5 +43,5 @@ volumes:
    keycloak_data:
 
 networks:
-  rtm-net:
+  hmfix-net:
     driver: bridge
