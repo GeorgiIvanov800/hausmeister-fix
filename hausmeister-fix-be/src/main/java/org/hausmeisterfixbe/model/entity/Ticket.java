@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hausmeisterfixbe.model.enums.TicketCategory;
 import org.hausmeisterfixbe.model.enums.Priority;
 import org.hausmeisterfixbe.model.enums.Status;
 
@@ -19,12 +20,13 @@ import java.time.Instant;
 public class Ticket extends BaseEntity {
 
     @Column(nullable = false)
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private TicketCategory ticketCategory;
 
     @Column(nullable = false)
     private String title;
 
-    @Column
+    @Column(nullable = false)
     private String description;
 
     @Enumerated(EnumType.STRING)
