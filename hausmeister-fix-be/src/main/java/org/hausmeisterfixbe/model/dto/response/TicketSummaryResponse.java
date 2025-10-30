@@ -16,6 +16,8 @@ public record TicketSummaryResponse(
         Status status,
         Priority priority,
         Instant createdAt,
+        UUID propertyId,
+        UUID unitId,
         String propertyName,
         String unitNumber,
         @Nullable
